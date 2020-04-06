@@ -1,0 +1,57 @@
+# 삼성 8658. Summation
+
+## 1. 문제 정보
+
+- 출처 : [8658. Summation](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AW1lwyh6WPwDFARC&categoryId=AW1lwyh6WPwDFARC&categoryType=CODE#none)
+
+- 난이도 : D3
+
+## 2. 문제 해결
+
+- 문제 유형 : 단순 풀이
+
+- 해결 방법  
+  단순하게 각 자리수의 합을 구하고, 그것에 대한 max 값과 min 값을 추출하면 된다.
+  
+## 3. 코드
+
+```c++
+#include <stdio.h>
+
+int sum(int num) {
+	int results = 0;
+
+	while (num != 0) {
+		results += num % 10;
+		num = num / 10;
+	}
+
+	return results;
+}
+
+int main() {
+	int TC;
+	scanf("%d", &TC);
+
+	for (int test_case = 1; test_case <= TC; test_case++) {
+		int num, max, min = 0;
+
+		for (int i = 0; i < 10; i++) {
+			scanf("%d", &num);
+			num = sum(num);
+			if (i == 0) {
+				max = num;
+				min = num;
+			}
+			else {
+				if (max < num) max = num;
+				if (min > num) min = num;
+			}
+		}
+
+		printf("#%d %d %d\n", test_case, max, min);
+	}
+
+	return 0;
+}
+```
